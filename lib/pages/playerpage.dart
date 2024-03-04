@@ -33,6 +33,7 @@ class PlayerPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // App bar
                   Padding(
@@ -139,18 +140,6 @@ class PlayerPage extends StatelessWidget {
                             // Start time
                             Text(
                               formatDuration(playlistProvider.currentDuration),
-                            ),
-
-                            // Shuffle
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.shuffle),
-                            ),
-
-                            // Repeat
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.repeat),
                             ),
 
                             // End time
