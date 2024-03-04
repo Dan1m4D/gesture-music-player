@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gesture_music_app/components/neubox.dart';
+import 'package:gesture_music_app/models/favorites_provider.dart';
 import 'package:gesture_music_app/models/playlist_provider.dart';
 import 'package:gesture_music_app/models/song.dart';
 import 'package:provider/provider.dart';
@@ -16,22 +17,22 @@ class PlayerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PlaylistProvider>(
-      builder: (context, value, child) {
+    return Consumer2<PlaylistProvider, FavoritesProvider>(
+      builder: (context, playlistProvider, favoriteProvider, child) {
         // get playlist
-        final playlist = value.playlist;
+        final playlist = playlistProvider.playlist;
 
         // get current song
-        final Song currentSong = playlist[value.currentSongIndex ?? 0];
+        final Song currentSong =
+            playlist[playlistProvider.currentSongIndex ?? 0];
 
         // return scaffold UI
         return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top:10),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
               child: Column(
-              
                 children: [
                   // App bar
                   Padding(
@@ -107,8 +108,15 @@ class PlayerPage extends StatelessWidget {
                               ),
                               // Like button
                               IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.favorite_border)),
+                                onPressed: () {
+                                  favoriteProvider
+                                      .toggleFavorite(currentSong);
+                                },
+                                icon: Icon(favoriteProvider
+                                        .isFavorite(currentSong)
+                                    ? Icons.favorite
+                                    : Icons.favorite_border),
+                              ),
                             ],
                           ),
                         ],
@@ -130,7 +138,7 @@ class PlayerPage extends StatelessWidget {
                           children: [
                             // Start time
                             Text(
-                              formatDuration(value.currentDuration),
+                              formatDuration(playlistProvider.currentDuration),
                             ),
 
                             // Shuffle
@@ -146,7 +154,8 @@ class PlayerPage extends StatelessWidget {
                             ),
 
                             // End time
-                            Text(formatDuration(value.totalDuration)),
+                            Text(
+                                formatDuration(playlistProvider.totalDuration)),
                           ],
                         ),
                       ),
@@ -157,15 +166,18 @@ class PlayerPage extends StatelessWidget {
                         ),
                         child: Slider(
                           min: 0,
-                          max: value.totalDuration.inSeconds.toDouble(),
+                          max: playlistProvider.totalDuration.inSeconds
+                              .toDouble(),
                           activeColor: Colors.indigo,
-                          value: value.currentDuration.inSeconds.toDouble(),
+                          value: playlistProvider.currentDuration.inSeconds
+                              .toDouble(),
                           onChanged: (value) {
                             // when slider is moved around
                           },
                           onChangeEnd: (double val) {
                             // when slider is released
-                            value.seekPosition(Duration(seconds: val.toInt()));
+                            playlistProvider
+                                .seekPosition(Duration(seconds: val.toInt()));
                           },
                         ),
                       ),
@@ -180,7 +192,7 @@ class PlayerPage extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            value.playPrevious();
+                            playlistProvider.playPrevious();
                           },
                           child: const NeuBox(
                             child: Icon(Icons.skip_previous),
@@ -197,10 +209,10 @@ class PlayerPage extends StatelessWidget {
                         flex: 2,
                         child: GestureDetector(
                           onTap: () {
-                            value.pauseOrResume();
+                            playlistProvider.pauseOrResume();
                           },
                           child: NeuBox(
-                            child: Icon(value.isPlaying
+                            child: Icon(playlistProvider.isPlaying
                                 ? Icons.pause
                                 : Icons.play_arrow),
                           ),
@@ -215,7 +227,7 @@ class PlayerPage extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            value.playNext();
+                            playlistProvider.playNext();
                           },
                           child: const NeuBox(
                             child: Icon(Icons.skip_next),

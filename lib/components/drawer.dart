@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gesture_music_app/pages/favoritespage.dart';
 import '../pages/settingspage.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -29,6 +30,23 @@ class AppDrawer extends StatelessWidget {
                 leading: const Icon(Icons.home),
                 onTap: () {
                   Navigator.pop(context);
+                },
+              ),
+            ),
+
+            // Home
+            Padding(
+              padding: const EdgeInsets.only(left: 25, top: 0),
+              child: ListTile(
+                title: const Text("F A V O R I T E S"),
+                leading: const Icon(Icons.favorite),
+                onTap: () {
+                  Navigator.pop(context);
+                  // navigate to favorites page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FavoritesPage()));
                 },
               ),
             ),

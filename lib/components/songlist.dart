@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gesture_music_app/components/neubox.dart';
+import 'package:gesture_music_app/components/neuitem.dart';
 import 'package:gesture_music_app/models/playlist_provider.dart';
 import 'package:gesture_music_app/models/song.dart';
 import 'package:gesture_music_app/pages/playerpage.dart';
@@ -29,11 +31,16 @@ class SongList extends StatelessWidget {
           itemBuilder: (context, index) {
             final Song song = playlist[index];
 
-            return ListTile(
-              leading: Image.asset(song.albumArtImagePath),
-              title: Text(song.title),
-              subtitle: Text(song.artist),
-              onTap: () => goToSong(index),
+            return NeuListItem(
+              child: ListTile(
+                leading: ClipOval(child: Image.asset(song.albumArtImagePath),),
+                title: Text(song.title),
+                subtitle: Text(
+                  song.artist,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                onTap: () => goToSong(index),
+              ),
             );
           },
         );
