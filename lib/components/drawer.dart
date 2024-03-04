@@ -33,23 +33,6 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
             ),
-
-            // Home
-            Padding(
-              padding: const EdgeInsets.only(left: 25, top: 0),
-              child: ListTile(
-                title: const Text("F A V O R I T E S"),
-                leading: const Icon(Icons.favorite),
-                onTap: () {
-                  Navigator.pop(context);
-                  // navigate to favorites page
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const FavoritesPage()));
-                },
-              ),
-            ),
             
             // Settings
             Padding(

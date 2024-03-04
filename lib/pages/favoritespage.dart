@@ -31,7 +31,8 @@ class FavoritesPage extends StatelessWidget {
                       child: ListTile(
                         title: Text(favorites[index].title),
                         subtitle: Text(favorites[index].artist),
-                        leading: ClipOval(
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
                           child: Image.asset(favorites[index].albumArtImagePath),
                         ),
                       ),

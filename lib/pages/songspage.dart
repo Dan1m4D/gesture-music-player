@@ -33,7 +33,10 @@ class SongList extends StatelessWidget {
 
             return NeuListItem(
               child: ListTile(
-                leading: ClipOval(child: Image.asset(song.albumArtImagePath),),
+                leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(song.albumArtImagePath),
+                ),
                 title: Text(song.title),
                 subtitle: Text(
                   song.artist,
