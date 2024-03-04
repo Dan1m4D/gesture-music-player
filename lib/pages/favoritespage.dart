@@ -10,12 +10,6 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("F A V O R I T E S"),
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
-      ),
-      drawer: const AppDrawer(),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Consumer<FavoritesProvider>(
         builder: (context, value, child) {
