@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gesture_music_app/pages/favoritespage.dart';
 import '../pages/settingspage.dart';
 
 class AppDrawer extends StatelessWidget {
