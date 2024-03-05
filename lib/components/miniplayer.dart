@@ -14,7 +14,6 @@ class MiniPlayer extends StatelessWidget {
     return Consumer<PlaylistProvider>(
       builder: (context, pl, child) {
         final playlist = pl.playlist;
-        final isPlaying = pl.isPlaying;
 
         // get current song
         final Song currentSong = playlist[pl.currentSongIndex ?? 0];

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gesture_music_app/components/drawer.dart';
 import 'package:gesture_music_app/components/neuitem.dart';
 import 'package:gesture_music_app/models/favorites_provider.dart';
 import 'package:provider/provider.dart';
